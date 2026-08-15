@@ -1,0 +1,147 @@
+<link rel="stylesheet" href="/css/update-product.css">
+
+<section class="update-product-page">
+
+  <div class="form-header">
+
+    <p class="form-label">
+      INOVA STORE
+    </p>
+
+    <h1>
+      Update Product
+    </h1>
+
+    <p class="form-subtitle">
+      Update the details of your product.
+    </p>
+
+  </div>
+
+
+  <div class="form-container">
+
+    <form
+      action="/products/update/<%= product._id %>"
+      method="POST"
+    >
+
+      <!-- Product Name -->
+
+      <div class="form-group">
+
+        <label for="name">
+          Product Name
+        </label>
+
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value="<%= product.name %>"
+          required
+        >
+
+      </div>
+
+
+      <!-- Description -->
+
+      <div class="form-group">
+
+        <label for="desc">
+          Description
+        </label>
+
+        <textarea
+          id="desc"
+          name="desc"
+          rows="5"
+          required
+        ><%= product.desc %></textarea>
+
+      </div>
+
+
+      <!-- Price -->
+
+      <div class="form-group">
+
+        <label for="price">
+          Price
+        </label>
+
+        <div class="input-with-prefix">
+
+          <span>$</span>
+
+          <input
+            type="number"
+            id="price"
+            name="price"
+            step="0.01"
+            min="0"
+            value="<%= product.price %>"
+            required
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- Image URL -->
+
+      <div class="form-group">
+
+        <label for="imageUrl">
+          Product Image URL
+        </label>
+
+        <input
+          type="url"
+          id="imageUrl"
+          name="imageUrl"
+          value="<%= product.imageUrl %>"
+        >
+
+        <p class="input-hint">
+          Update the image URL if you want to change the product image.
+        </p>
+
+      </div>
+
+
+      <!-- Actions -->
+
+      <div class="form-actions">
+
+        <button
+          type="submit"
+          class="btn-submit"
+        >
+          Update Product
+        </button>
+
+        <a
+          href="/products/details/<%= product._id %>"
+          class="cancel-btn"
+        >
+          Cancel
+        </a>
+
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <a
+    class="back-link"
+    href="/products"
+  >
+    ← Back to Products
+  </a>
+
+</section>

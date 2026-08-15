@@ -1,0 +1,101 @@
+<link rel="stylesheet" href="/css/product.css">
+
+<section class="products-page">
+
+  <div class="products-header">
+
+    <div>
+      <p class="products-label">INOVA STORE</p>
+
+      <h1 class="page-title">
+        Products
+      </h1>
+
+      <p class="products-subtitle">
+        Explore our collection of premium Apple products.
+      </p>
+    </div>
+
+    <a class="add-product-btn" href="/products/new">
+      + Add Product
+    </a>
+
+  </div>
+
+
+  <div class="product-container">
+
+    <% products.forEach(product => { %>
+
+      <article class="product-card">
+
+        <!-- Product Image -->
+
+        <div class="product-image">
+
+          <img
+            src="<%= product.imageUrl %>"
+            alt="<%= product.name %>"
+          >
+
+        </div>
+
+
+        <!-- Product Information -->
+
+        <div class="product-info">
+
+          <h3 class="name">
+            <%= product.name %>
+          </h3>
+
+          <p class="description">
+            <%= product.desc %>
+          </p>
+
+          <p class="price">
+            $<%= product.price %>
+          </p>
+
+
+          <!-- Actions -->
+
+          <div class="product-actions">
+
+            <a
+              class="view-btn"
+              href="/products/details/<%= product._id %>"
+            >
+              View Details
+            </a>
+
+            <a
+              class="edit-btn"
+              href="/products/edit/<%= product._id %>"
+            >
+              Edit
+            </a>
+
+            <form
+              action="/products/delete/<%= product._id %>"
+              method="POST"
+            >
+              <button
+                class="delete-btn"
+                type="submit"
+              >
+                Delete
+              </button>
+            </form>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    <% }) %>
+
+  </div>
+
+</section>

@@ -1,0 +1,371 @@
+/* =========================================
+   PRODUCTS PAGE
+========================================= */
+
+.products-page {
+  width: 100%;
+}
+
+
+/* =========================================
+   PRODUCTS HEADER
+========================================= */
+
+.products-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-end;
+
+  gap: 30px;
+
+  margin-bottom: 45px;
+}
+
+.products-label {
+  font-size: 12px;
+
+  font-weight: 600;
+
+  letter-spacing: 2px;
+
+  color: #86868b;
+
+  margin-bottom: 8px;
+}
+
+.page-title {
+  font-size: 48px;
+
+  font-weight: 700;
+
+  letter-spacing: -2px;
+
+  color: #1d1d1f;
+
+  margin-bottom: 10px;
+}
+
+.products-subtitle {
+  font-size: 16px;
+
+  color: #6e6e73;
+}
+
+
+/* =========================================
+   ADD PRODUCT
+========================================= */
+
+.add-product-btn {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 20px;
+
+  background-color: #1d1d1f;
+
+  color: white;
+
+  border-radius: 980px;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  white-space: nowrap;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.add-product-btn:hover {
+  background-color: #424245;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================
+   PRODUCT GRID
+========================================= */
+
+.product-container {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 24px;
+}
+
+
+/* =========================================
+   PRODUCT CARD
+========================================= */
+
+.product-card {
+  overflow: hidden;
+
+  background-color: white;
+
+  border: 1px solid #e5e5e7;
+
+  border-radius: 18px;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================
+   PRODUCT IMAGE
+========================================= */
+
+.product-image {
+  height: 280px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px;
+
+  background-color: #f5f5f7;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.04);
+}
+
+
+/* =========================================
+   PRODUCT INFO
+========================================= */
+
+.product-info {
+  padding: 25px;
+}
+
+.name {
+  font-size: 20px;
+
+  font-weight: 600;
+
+  letter-spacing: -0.4px;
+
+  color: #1d1d1f;
+
+  margin-bottom: 10px;
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.description {
+  font-size: 14px;
+
+  line-height: 1.55;
+
+  color: #6e6e73;
+
+  /*
+    Only show 2 lines
+  */
+
+  display: -webkit-box;
+
+  -webkit-box-orient: vertical;
+
+  -webkit-line-clamp: 2;
+
+  overflow: hidden;
+
+  /*
+    Keeps the card height consistent
+  */
+
+  min-height: calc(14px * 1.55 * 2);
+
+  margin-bottom: 18px;
+}
+
+
+/* =========================================
+   PRICE
+========================================= */
+
+.price {
+  font-size: 20px;
+
+  font-weight: 600;
+
+  color: #1d1d1f;
+
+  margin-bottom: 20px;
+}
+
+
+/* =========================================
+   PRODUCT ACTIONS
+========================================= */
+
+.product-actions {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+
+/* Common */
+
+.view-btn,
+.edit-btn,
+.delete-btn {
+  width: 100%;
+
+  padding: 10px 15px;
+
+  border-radius: 8px;
+
+  text-align: center;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+
+/* View */
+
+.view-btn {
+  background-color: #1d1d1f;
+
+  color: white;
+
+  text-decoration: none;
+}
+
+.view-btn:hover {
+  background-color: #424245;
+}
+
+
+/* Edit */
+
+.edit-btn {
+  background-color: #f5f5f7;
+
+  color: #1d1d1f;
+
+  text-decoration: none;
+}
+
+.edit-btn:hover {
+  background-color: #e8e8ed;
+}
+
+
+/* Delete */
+
+.product-actions form {
+  width: 100%;
+}
+
+.delete-btn {
+  border: none;
+
+  background-color: transparent;
+
+  color: #d70015;
+}
+
+.delete-btn:hover {
+  background-color: #fff1f2;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 950px) {
+
+  .product-container {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .products-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .add-product-btn {
+    align-self: flex-start;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .page-title {
+    font-size: 38px;
+  }
+
+  .products-header {
+    margin-bottom: 30px;
+  }
+
+  .product-container {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+  .product-image {
+    height: 250px;
+  }
+
+  .product-info {
+    padding: 20px;
+  }
+}

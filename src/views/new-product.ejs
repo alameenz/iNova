@@ -1,0 +1,135 @@
+<link rel="stylesheet" href="/css/new-product.css">
+
+<section class="new-product-page">
+
+  <div class="form-header">
+
+    <p class="form-label">
+      INOVA STORE
+    </p>
+
+    <h1>
+      Add Product
+    </h1>
+
+    <p class="form-subtitle">
+      Add a new product to your iNova collection.
+    </p>
+
+  </div>
+
+
+  <div class="form-container">
+
+    <form action="/products" method="POST">
+
+      <!-- Product Name -->
+
+      <div class="form-group">
+
+        <label for="name">
+          Product Name
+        </label>
+
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="e.g. iPhone 17 Pro"
+          required
+        >
+
+      </div>
+
+
+      <!-- Description -->
+
+      <div class="form-group">
+
+        <label for="desc">
+          Description
+        </label>
+
+        <textarea
+          id="desc"
+          name="desc"
+          rows="5"
+          placeholder="Enter a brief description of the product..."
+          required
+        ></textarea>
+
+      </div>
+
+
+      <!-- Price -->
+
+      <div class="form-group">
+
+        <label for="price">
+          Price
+        </label>
+
+        <div class="input-with-prefix">
+
+          <span>$</span>
+
+          <input
+            type="number"
+            id="price"
+            name="price"
+            step="0.01"
+            min="0"
+            placeholder="1199.99"
+            required
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- Image URL -->
+
+      <div class="form-group">
+
+        <label for="imageUrl">
+          Product Image URL
+        </label>
+
+        <input
+          type="url"
+          id="imageUrl"
+          name="imageUrl"
+          placeholder="https://example.com/image.jpg"
+          required
+        >
+
+        <p class="input-hint">
+          Use a direct URL to the product image.
+        </p>
+
+      </div>
+
+
+      <!-- Submit -->
+
+      <button
+        type="submit"
+        class="btn-submit"
+      >
+        Add Product
+      </button>
+
+    </form>
+
+  </div>
+
+
+  <a
+    class="back-link"
+    href="/products"
+  >
+    ← Back to Products
+  </a>
+
+</section>
