@@ -2,10 +2,14 @@
 
 <section class="details-page">
 
+  <!-- Header -->
+
   <div class="details-header">
 
     <div>
-      <p class="details-label">INOVA STORE</p>
+      <p class="details-label">
+        INOVA STORE
+      </p>
 
       <h1 class="page-title">
         Product Details
@@ -18,6 +22,8 @@
 
   </div>
 
+
+  <!-- Product -->
 
   <article class="product-details">
 
@@ -51,6 +57,9 @@
         <%= product.desc %>
       </p>
 
+
+      <!-- Price -->
+
       <div class="price-section">
 
         <span class="price-label">
@@ -63,34 +72,138 @@
 
       </div>
 
+      <!-- Sold by -->
 
-      <!-- Actions -->
+<div class="seller-details-session">
 
-      <div class="product-actions">
+  <div class="seller-header">
+    <span class="seller-label">
+      Sold by
+    </span>
+  </div>
 
-        <a
-          class="edit-btn"
-          href="/products/edit/<%= product._id %>"
-        >
-          Edit Product
-        </a>
+  <div class="seller-info">
+
+    <p class="seller-name">
+      <%= product.seller.name %>
+    </p>
+
+    <a
+      class="contact-seller-btn"
+      href="mailto:<%= product.seller.email %>?subject=Regarding%20your%20product%20-%20<%= encodeURIComponent(product.name) %>"
+    >
+      Contact Seller
+    </a>
+
+  </div>
+
+</div>
+
+
+      <!-- Customer Actions -->
+
+      <div class="cart-section">
 
         <form
-          action="/products/delete/<%= product._id %>"
+          class="cart-form"
+          action="/cart/add/<%= product._id %>"
           method="POST"
         >
+
+          <div class="quantity-wrapper">
+
+            <label for="quantity">
+              Quantity
+            </label>
+
+            <div class="quantity-control"> 
+
+              <button
+                type="button"
+                class="quantity-btn decrease-btn"
+              >
+                −
+              </button>
+
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                value="1"
+                min="1"
+                max="99"
+                readonly
+              >
+
+              <button
+                type="button"
+                class="quantity-btn increase-btn"
+              >
+                +
+              </button>
+
+            </div>
+
+          </div>
+
+
           <button
-            class="delete-btn"
             type="submit"
+            class="cart-btn"
           >
-            Delete Product
+            Add to Cart
           </button>
+
         </form>
 
       </div>
+
+
+      <!-- Seller Actions -->
+
+      <% if (user && user.role === "seller") { %>
+        <% if(product.seller.toString() === user._id.toString()) { %>
+
+        <div class="seller-section">
+
+          <p class="seller-label">
+            SELLER ACTIONS
+          </p>
+
+
+          <a
+            class="edit-btn"
+            href="/products/edit/<%= product._id %>"
+          >
+            Edit Product
+          </a>
+
+
+          <form
+            class="delete-form"
+            action="/products/delete/<%= product._id %>"
+            method="POST"
+          >
+
+            <button
+              class="delete-btn"
+              type="submit"
+            >
+              Delete Product
+            </button>
+
+          </form>
+
+        </div>
+
+        <% } %>
+      <% } %>
 
     </div>
 
   </article>
 
 </section>
+
+
+<script src="/js/product-details.js"></script>

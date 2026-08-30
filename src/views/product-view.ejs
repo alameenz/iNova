@@ -2,10 +2,17 @@
 
 <section class="products-page">
 
+  <!-- =========================================
+       HEADER
+  ========================================== -->
+
   <div class="products-header">
 
-    <div>
-      <p class="products-label">INOVA STORE</p>
+    <div class="products-heading">
+
+      <p class="products-label">
+        INOVA STORE
+      </p>
 
       <h1 class="page-title">
         Products
@@ -14,14 +21,30 @@
       <p class="products-subtitle">
         Explore our collection of premium Apple products.
       </p>
+
     </div>
 
-    <a class="add-product-btn" href="/products/new">
-      + Add Product
-    </a>
+
+    <!-- Seller Only -->
+
+    <% if (user && user.role === "seller") { %>
+
+      <a
+        class="add-product-btn"
+        href="/products/new"
+      >
+        <span>+</span>
+        Add Product
+      </a>
+
+    <% } %>
 
   </div>
 
+
+  <!-- =========================================
+       PRODUCT GRID
+  ========================================== -->
 
   <div class="product-container">
 
@@ -29,21 +52,33 @@
 
       <article class="product-card">
 
-        <!-- Product Image -->
 
-        <div class="product-image">
+        <!-- =====================================
+             PRODUCT IMAGE
+        ====================================== -->
+
+        <a
+          href="/products/details/<%= product._id %>"
+          class="product-image"
+        >
 
           <img
             src="<%= product.imageUrl %>"
             alt="<%= product.name %>"
           >
 
-        </div>
+        </a>
 
 
-        <!-- Product Information -->
+        <!-- =====================================
+             PRODUCT INFO
+        ====================================== -->
 
         <div class="product-info">
+
+          <p class="product-category">
+            APPLE
+          </p>
 
           <h3 class="name">
             <%= product.name %>
@@ -58,9 +93,14 @@
           </p>
 
 
-          <!-- Actions -->
+          <!-- =====================================
+               ACTIONS
+          ====================================== -->
 
           <div class="product-actions">
+
+
+            <!-- EVERYONE CAN SEE THIS -->
 
             <a
               class="view-btn"
@@ -69,24 +109,44 @@
               View Details
             </a>
 
-            <a
-              class="edit-btn"
-              href="/products/edit/<%= product._id %>"
-            >
-              Edit
-            </a>
 
-            <form
-              action="/products/delete/<%= product._id %>"
-              method="POST"
-            >
-              <button
-                class="delete-btn"
-                type="submit"
-              >
-                Delete
-              </button>
-            </form>
+            <!-- ===================================
+                 SELLER OWNERSHIP ACTIONS
+            ==================================== -->
+
+            <% if (
+              user &&
+              user.role === "seller" &&
+              product.seller.toString() === user._id.toString()
+            ) { %>
+
+              <div class="seller-actions">
+
+                <a
+                  class="edit-btn"
+                  href="/products/edit/<%= product._id %>"
+                >
+                  Edit Product
+                </a>
+
+
+                <form
+                  action="/products/delete/<%= product._id %>"
+                  method="POST"
+                >
+
+                  <button
+                    class="delete-btn"
+                    type="submit"
+                  >
+                    Delete Product
+                  </button>
+
+                </form>
+
+              </div>
+
+            <% } %>
 
           </div>
 

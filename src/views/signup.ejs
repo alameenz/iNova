@@ -1,0 +1,128 @@
+<link rel="stylesheet" href="/css/signup.css">
+
+<section class="auth-page">
+
+  <div class="auth-container">
+
+    <div class="auth-header">
+
+      <a href="/" class="auth-logo">
+        iNova
+      </a>
+
+      <h1>
+        Create your account.
+      </h1>
+
+      <p>
+        Join iNova and start exploring our collection.
+      </p>
+
+    </div>
+
+
+    <form
+      class="auth-form"
+      action="/signup"
+      method="POST"
+    >
+
+      <!-- Name -->
+
+      <div class="form-group">
+
+        <label for="name">
+          Full Name
+        </label>
+
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="John Doe"
+          autocomplete="name"
+          required
+        >
+
+      </div>
+
+
+      <!-- Email -->
+
+      <div class="form-group">
+
+        <label for="email">
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="name@example.com"
+          autocomplete="email"
+          required
+        >
+
+      </div>
+
+
+      <!-- Password -->
+
+      <div class="form-group">
+
+        <label for="password">
+          Password
+        </label>
+
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Create a password"
+          autocomplete="new-password"
+          required
+        >
+
+        <p class="password-hint">
+          Choose a strong password to keep your account secure.
+        </p>
+
+      </div>
+
+
+      <!-- Submit -->
+
+      <button
+        type="submit"
+        class="signup-btn"
+      >
+        Create Account
+      </button>
+
+    </form>
+
+
+    <div class="auth-divider">
+      <span>or</span>
+    </div>
+
+
+    <p class="login-text">
+      Already have an account?
+      <a href="/login">
+        Sign In
+      </a>
+    </p>
+
+
+    <a
+      href="/"
+      class="back-home"
+    >
+      ← Back to iNova
+    </a>
+
+  </div>
+
+</section>

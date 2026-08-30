@@ -4,76 +4,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>iNova</title>
+    <title>iNova.test</title>
 
     <link rel="stylesheet" href="/css/main.css" />
   </head>
 
   <body class="site-body">
-
     <!-- Header -->
     <header class="site-header">
       <div class="container header-container">
-
-        <a href="/" class="site-title">
-          iNova
-        </a>
+        <a href="/" class="site-title"> iNova </a>
 
         <nav class="navbar">
-          <a class="nav-link active" href="/">
-            Home
-          </a>
+          <a class="nav-link active" href="/"> Home </a>
 
-          <a class="nav-link" href="/products">
-            Products
-          </a>
+          <a class="nav-link" href="/products"> Products </a>
 
-          <a class="nav-link" href="/cart">
-            Cart
-          </a>
+          <a class="nav-link" href="/cart"> Cart </a>
 
-          <a class="nav-link" href="/account">
-            Account
-          </a>
+          <a class="nav-link" href="/account"> Account </a>
         </nav>
-
       </div>
     </header>
 
+    <!-- Flash Messages -->
+    <div class="container mt-3">
+      <%- include('../partials/flash-messages') %>
+    </div>
 
     <!-- Main Content -->
     <main class="main-content">
-      <div class="container">
-        <%- body %>
-      </div>
+      <div class="container"><%- body %></div>
     </main>
-
 
     <!-- Footer -->
     <footer class="site-footer">
-
       <div class="container">
-
         <div class="footer-content">
-
           <!-- Brand -->
           <div class="footer-brand">
-
-            <a href="/" class="footer-logo">
-              iNova
-            </a>
+            <a href="/" class="footer-logo"> iNova </a>
 
             <p>
-              Premium Apple products, thoughtfully
-              brought together in one place.
+              Premium Apple products, thoughtfully brought together in one
+              place.
             </p>
-
           </div>
-
 
           <!-- Shop -->
           <div class="footer-column">
-
             <h3>Shop</h3>
 
             <a href="/products">All Products</a>
@@ -81,52 +60,34 @@
             <a href="/products">Mac</a>
             <a href="/products">iPad</a>
             <a href="/products">AirPods</a>
-
           </div>
-
 
           <!-- Support -->
           <div class="footer-column">
-
             <h3>Support</h3>
 
             <a href="/account">My Account</a>
             <a href="/cart">Shopping Cart</a>
             <a href="/products">Product Details</a>
-
           </div>
-
 
           <!-- Company -->
           <div class="footer-column">
-
             <h3>iNova</h3>
 
             <a href="/">About Us</a>
             <a href="/">Contact</a>
             <a href="/">Privacy</a>
             <a href="/">Terms</a>
-
           </div>
-
         </div>
-
 
         <div class="footer-bottom">
+          <p>© 2026 iNova. All rights reserved.</p>
 
-          <p>
-            © 2026 iNova. All rights reserved.
-          </p>
-
-          <p>
-            Designed for a better shopping experience.
-          </p>
-
+          <p>Designed for a better shopping experience.</p>
         </div>
-
       </div>
-
     </footer>
-
   </body>
 </html>

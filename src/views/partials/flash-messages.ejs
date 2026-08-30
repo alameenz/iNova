@@ -1,0 +1,130 @@
+<link rel="stylesheet" href="/css/flash-messages.css" />
+
+<!-- Success Messages -->
+
+<% if (messages.success && messages.success.length > 0) { %>
+<% messages.success.forEach(msg => { %>
+
+<div class="flash-toast flash-success">
+
+  <div class="flash-icon">
+    ✓
+  </div>
+
+  <div class="flash-content">
+    <div class="flash-title">
+      Success
+    </div>
+
+    <div class="flash-message">
+      <%= msg %>
+    </div>
+  </div>
+
+  <button
+    type="button"
+    class="flash-close"
+    aria-label="Close">
+    ×
+  </button>
+
+  <div class="flash-progress"></div>
+
+</div>
+
+
+<% }); %>
+<% } %>
+
+<!-- Error Messages -->
+
+<% if (messages.error && messages.error.length > 0) { %>
+<% messages.error.forEach(msg => { %>
+
+
+<div class="flash-toast flash-error">
+
+  <div class="flash-icon">
+    !
+  </div>
+
+  <div class="flash-content">
+    <div class="flash-title">
+      Error
+    </div>
+
+    <div class="flash-message">
+      <%= msg %>
+    </div>
+  </div>
+
+  <button
+    type="button"
+    class="flash-close"
+    aria-label="Close">
+    ×
+  </button>
+
+  <div class="flash-progress"></div>
+
+</div>
+
+
+<% }); %>
+<% } %>
+
+<!-- Warning Messages -->
+
+<% if (messages.warning && messages.warning.length > 0) { %>
+<% messages.warning.forEach(msg => { %>
+
+ 
+<div class="flash-toast flash-warning">
+
+  <div class="flash-icon">
+    !
+  </div>
+
+  <div class="flash-content">
+    <div class="flash-title">
+      Warning
+    </div>
+
+    <div class="flash-message">
+      <%= msg %>
+    </div>
+  </div>
+
+  <button
+    type="button"
+    class="flash-close"
+    aria-label="Close">
+    ×
+  </button>
+
+  <div class="flash-progress"></div>
+
+</div>
+
+
+<% }); %>
+<% } %>
+
+<script>
+  document.querySelectorAll(".flash-toast").forEach((toast) => {
+
+    const closeButton = toast.querySelector(".flash-close");
+
+    const removeToast = () => {
+      toast.classList.add("flash-removing");
+
+      setTimeout(() => {
+        toast.remove();
+      }, 350);
+    };
+
+    closeButton.addEventListener("click", removeToast);
+
+    setTimeout(removeToast, 10000);
+  });
+</script>
