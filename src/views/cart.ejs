@@ -1,0 +1,120 @@
+<link rel="stylesheet" href="/css/cart.css">
+
+<section class="cart-page">
+
+  <!-- Header -->
+
+  <div class="cart-header">
+
+    <div>
+      <p class="cart-label">
+        INOVA STORE
+      </p>
+
+      <h1 class="page-title">
+        Your Cart
+      </h1>
+    </div>
+
+    <a class="back-btn" href="/products">
+      ← Continue Shopping
+    </a>
+
+  </div>
+
+
+  <% if (items.length === 0) { %>
+
+    <!-- Empty State -->
+
+    <div class="cart-empty">
+      <p>Your cart is empty.</p>
+      <a class="browse-btn" href="/products">Browse Products</a>
+    </div>
+
+  <% } else { %>
+
+    <div class="cart-layout">
+
+      <!-- Cart Items -->
+
+      <div class="cart-items">
+
+        <% items.forEach(function(item) { %>
+
+          <div class="cart-item">
+
+            <a href="/products/details/<%= item.product._id %>" class="cart-item-image">
+              <img src="<%= item.product.imageUrl %>" alt="<%= item.product.name %>">
+            </a>
+
+            <div class="cart-item-info">
+
+              <a href="/products/details/<%= item.product._id %>" class="cart-item-name">
+                <%= item.product.name %>
+              </a>
+
+              <p class="cart-item-price">
+                $<%= item.product.price %>
+              </p>
+
+              <div class="cart-item-actions">
+
+                <form class="quantity-form" action="/cart/update/<%= item.product._id %>" method="POST">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                  <label for="qty-<%= item.product._id %>">Qty</label>
+
+                  <input
+                    type="number"
+                    id="qty-<%= item.product._id %>"
+                    name="quantity"
+                    value="<%= item.quantity %>"
+                    min="1"
+                    max="99"
+                  >
+
+                  <button type="submit" class="update-btn">Update</button>
+                </form>
+
+                <form class="remove-form" action="/cart/remove/<%= item.product._id %>" method="POST">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                  <button type="submit" class="remove-btn">Remove</button>
+                </form>
+
+              </div>
+
+            </div>
+
+            <div class="cart-item-subtotal">
+              $<%= (item.product.price * item.quantity).toFixed(2) %>
+            </div>
+
+          </div>
+
+        <% }); %>
+
+      </div>
+
+      <!-- Summary -->
+
+      <div class="cart-summary">
+
+        <h2>Order Summary</h2>
+
+        <div class="summary-row">
+          <span>Total</span>
+          <span class="summary-total">$<%= cartTotal.toFixed(2) %></span>
+        </div>
+
+        <button class="checkout-btn" type="button" disabled title="Checkout is coming soon">
+          Checkout (coming soon)
+        </button>
+
+      </div>
+
+    </div>
+
+  <% } %>
+
+</section>

@@ -1,6 +1,15 @@
 import ProductModel from "../model/product.model.js";
 
 export default class SellerController {
+  constructor() {
+    const proto = Object.getPrototypeOf(this);
+    for (const key of Object.getOwnPropertyNames(proto)) {
+      if (key !== "constructor" && typeof this[key] === "function") {
+        this[key] = this[key].bind(this);
+      }
+    }
+  }
+
   async getSellerDashboard(req, res) {
     try {
       // get seller products only

@@ -110,6 +110,8 @@
           method="POST"
         >
 
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
           <div class="quantity-wrapper">
 
             <label for="quantity">
@@ -162,7 +164,7 @@
       <!-- Seller Actions -->
 
       <% if (user && user.role === "seller") { %>
-        <% if(product.seller.toString() === user._id.toString()) { %>
+        <% if(product.seller._id.toString() === user._id.toString()) { %>
 
         <div class="seller-section">
 
@@ -184,6 +186,8 @@
             action="/products/delete/<%= product._id %>"
             method="POST"
           >
+
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
             <button
               class="delete-btn"

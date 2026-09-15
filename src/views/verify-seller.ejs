@@ -11,6 +11,7 @@
     </p>
 
     <form action="/verify-seller" method="POST" class="verify-form">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
       <label for="otp"> Verification Code </label>
 
       <input

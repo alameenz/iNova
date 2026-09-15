@@ -4,6 +4,17 @@ import { validateLogin, validateSignup } from "../utils/validation.js";
 import { sendSellerOTP } from "../utils/email.js";
 
 export default class AuthController {
+  constructor() {
+    // Auto-bind every method so `this` is never lost when routes pass
+    // these methods by reference (e.g. router.get("/login", controller.getLoginForm)).
+    const proto = Object.getPrototypeOf(this);
+    for (const key of Object.getOwnPropertyNames(proto)) {
+      if (key !== "constructor" && typeof this[key] === "function") {
+        this[key] = this[key].bind(this);
+      }
+    }
+  }
+
   getAccount(req, res) {
     res.render("account", {
       user: req.session.user,

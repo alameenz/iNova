@@ -28,6 +28,7 @@
       <a href="/account" class="cancel-btn"> Cancel </a>
 
       <form method="POST" action="/become-seller">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <button type="submit" class="continue-btn">Continue</button>
       </form>
     </div>

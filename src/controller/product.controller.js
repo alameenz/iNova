@@ -2,6 +2,17 @@ import ProductModel from "../model/product.model.js";
 import { validateObjectId, validateProduct } from "../utils/validation.js";
 
 export default class ProductController {
+  constructor() {
+    // Auto-bind every method so `this` is never lost when routes pass
+    // these methods by reference (e.g. router.get("/products", controller.getproducts)).
+    const proto = Object.getPrototypeOf(this);
+    for (const key of Object.getOwnPropertyNames(proto)) {
+      if (key !== "constructor" && typeof this[key] === "function") {
+        this[key] = this[key].bind(this);
+      }
+    }
+  }
+
   mainPage(req, res) {
     res.render("home");
   }
@@ -10,14 +21,17 @@ export default class ProductController {
 
   async getproducts(req, res) {
     try {
-      const products = await ProductModel.find().populate("seller","name email");
+      const products = await ProductModel.find().populate(
+        "seller",
+        "name email",
+      );
       res.render("product-view", {
         products,
       });
     } catch (error) {
       console.error(error);
-
-      res.status(500).send("Error while fetching products");
+      req.flash("error", "Error while fetching products");
+      res.redirect("/");
     }
   }
 
@@ -33,7 +47,8 @@ export default class ProductController {
     try {
       const errors = validateProduct(req.body);
       if (errors.length > 0) {
-        return res.status(400).send(errors.join("<br>"));
+        errors.forEach((err) => req.flash("error", err));
+        return res.redirect("/products/new");
       }
 
       const { name, desc, price, imageUrl } = req.body;
@@ -46,11 +61,12 @@ export default class ProductController {
         seller: req.session.user._id,
       });
 
+      req.flash("success", "Product added successfully");
       res.redirect("/products");
     } catch (error) {
       console.error(error);
-
-      res.status(500).send("Error while adding product");
+      req.flash("error", "Error while adding product");
+      res.redirect("/products/new");
     }
   }
 
@@ -61,13 +77,15 @@ export default class ProductController {
       const id = req.params.id;
 
       if (!validateObjectId(id)) {
-        return res.status(400).send("Invalid product ID");
+        req.flash("error", "Invalid product ID");
+        return res.redirect("/products");
       }
 
       const product = await ProductModel.findById(id);
 
       if (!product) {
-        return res.status(404).send("Product not found!!");
+        req.flash("error", "Product not found");
+        return res.redirect("/products");
       }
 
       res.render("update-product", {
@@ -75,8 +93,8 @@ export default class ProductController {
       });
     } catch (error) {
       console.error(error);
-
-      res.status(500).send("Error while loading update form");
+      req.flash("error", "Error while loading update form");
+      res.redirect("/products");
     }
   }
 
@@ -87,13 +105,15 @@ export default class ProductController {
       const id = req.params.id;
 
       if (!validateObjectId(id)) {
-        return res.status(400).send("Invalid product ID");
+        req.flash("error", "Invalid product ID");
+        return res.redirect("/products");
       }
 
       const errors = validateProduct(req.body);
 
       if (errors.length > 0) {
-        return res.status(400).send(errors.join("<br>"));
+        errors.forEach((err) => req.flash("error", err));
+        return res.redirect(`/products/edit/${id}`);
       }
 
       const { name, desc, price, imageUrl } = req.body;
@@ -111,14 +131,16 @@ export default class ProductController {
         },
       );
       if (!product) {
-        return res.status(404).send("Product not found");
+        req.flash("error", "Product not found");
+        return res.redirect("/products");
       }
 
+      req.flash("success", "Product updated successfully");
       res.redirect("/products");
     } catch (error) {
       console.error(error);
-
-      res.status(500).send("Error while updating product");
+      req.flash("error", "Error while updating product");
+      res.redirect("/products");
     }
   }
 
@@ -129,20 +151,23 @@ export default class ProductController {
       const id = req.params.id;
 
       if (!validateObjectId(id)) {
-        return res.status(400).send("Invalid product ID");
+        req.flash("error", "Invalid product ID");
+        return res.redirect("/products");
       }
 
       const product = await ProductModel.findByIdAndDelete(id);
 
       if (!product) {
-        return res.status(404).send("Product not found");
+        req.flash("error", "Product not found");
+        return res.redirect("/products");
       }
 
+      req.flash("success", "Product deleted");
       res.redirect("/products");
     } catch (error) {
       console.error(error);
-
-      res.status(500).send("Error while deleting product");
+      req.flash("error", "Error while deleting product");
+      res.redirect("/products");
     }
   }
 
@@ -153,13 +178,18 @@ export default class ProductController {
       const id = req.params.id;
 
       if (!validateObjectId(id)) {
-        return res.status(400).send("Product not found");
+        req.flash("error", "Product not found");
+        return res.redirect("/products");
       }
 
-      const product = await ProductModel.findById(id).populate("seller", "name email");
+      const product = await ProductModel.findById(id).populate(
+        "seller",
+        "name email",
+      );
 
       if (!product) {
-        return res.status(404).send("Product not found");
+        req.flash("error", "Product not found");
+        return res.redirect("/products");
       }
 
       res.render("product-details", {
@@ -167,8 +197,8 @@ export default class ProductController {
       });
     } catch (error) {
       console.error(error);
-
-      res.status(500).send("Error while fetching product details");
+      req.flash("error", "Error while fetching product details");
+      res.redirect("/products");
     }
   }
 }
